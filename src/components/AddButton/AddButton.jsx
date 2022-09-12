@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "primereact/button";
 import "primeicons/primeicons.css";
 import Swal from 'sweetalert2'
+import { ValContext } from "../../context/ValContext";
 
-export const AddButton = ({ onNewTodo }) => {
+export const AddButton = ( ) => {
+
+  const { newTodo, todos, setViewTodo } = useContext(ValContext)
 
 
   const alert = () => {
@@ -25,7 +28,8 @@ export const AddButton = ({ onNewTodo }) => {
             done: false,
             description: success.value
           }
-          onNewTodo(todo);
+          // setViewTodo([...todos, todo])
+          newTodo(todo);
         } 
       }
     })

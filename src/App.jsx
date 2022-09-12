@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './App.css';
 import {} from './styles';
 
@@ -12,12 +12,11 @@ import '/node_modules/primeflex/primeflex.css';
 import { NavBar } from './components/NavBar/NavBar';
 import { useTodos } from './hooks/useTodos';
 import { TodoList } from './helpers/TodoList';
+import { ValContext } from './context/ValContext';
 
 function App() {
 
-  const [viewTodos, setViewTodos] = useState('');
-
-  const {todos, todosCount, pendingTodosCount, newTodo, deleteTodo, toggleTodo, deleteAllTodos} = useTodos();
+  const {todos, viewTodo, todosCount, pendingTodosCount, newTodo, deleteTodo, toggleTodo, deleteAllTodos} = useContext(ValContext);
 
   return (
     <div className="App ">
@@ -26,6 +25,7 @@ function App() {
       <NavBar newTodo={ newTodo } deleteTodos ={ deleteAllTodos } />
       <div  >
         <TodoList 
+          // todos = { viewTodo }
           todos = { todos }
           handleDelete = { deleteTodo } 
           handleToggle = { toggleTodo }

@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import { ValContext } from "../context/ValContext";
 
-export const TodoItem = ({ todo, DeleteTodo, ToggleTodo }) => {
+export const TodoItem = ({ todo }) => {
+
+  const {deleteTodo, toggleTodo} = useContext(ValContext);
+
+  const borrarTodo = () => {
+    deleteTodo(todo.id);
+    // const newTodos = DeleteTodo(todo.id);
+    // setViewTodo(newTodos)
+  }
 
   const footer = (
     <span>
       <Button 
         label={`${todo.done === false ? "Terminar" : "Cancelar"}`} 
-        onClick={() => ToggleTodo(todo.id)}
+        onClick={() => toggleTodo(todo.id)}
         />
       <Button
         label="Borrar"
         icon="pi pi-times"
         className="p-button-secondary ml-2"
-        onClick={() => DeleteTodo(todo.id)}
+        onClick={() => borrarTodo(todo.id)}
       />
     </span>
   );
@@ -29,6 +38,5 @@ export const TodoItem = ({ todo, DeleteTodo, ToggleTodo }) => {
         {todo.description}
       </h3>
     </Card>
-    //todo agregar componente de card de primereact para hacer cada todo
   );
 };

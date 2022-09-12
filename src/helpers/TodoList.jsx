@@ -10,8 +10,6 @@ export const TodoList = ({ todos=[], handleDelete, handleToggle }) => {
           <TodoItem
             key={todo.id}
             todo={todo}
-            DeleteTodo={handleDelete}
-            ToggleTodo={handleToggle}
           />
         ) )
       }

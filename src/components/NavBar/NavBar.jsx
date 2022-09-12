@@ -1,18 +1,19 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import { AddButton } from '../AddButton/AddButton'
 import { Menubar } from 'primereact/menubar';
 import { Toast } from 'primereact/toast';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { useTodos } from '../../hooks/useTodos';
+import { ValContext } from '../../context/ValContext';
 
-export const NavBar = ({ newTodo, deleteTodos }) => {
+export const NavBar = () => {
+
+  const { todos, deleteAllTodos, setViewTodo } = useContext(ValContext)
 
   const toast = useRef(null);
 
-
-
   const accept = () => {
-    deleteTodos();
+    deleteAllTodos();
   }
 
   const reject = () => {
@@ -42,21 +43,21 @@ export const NavBar = ({ newTodo, deleteTodos }) => {
                 label: 'Todos',
                 icon: 'pi pi-bars',
                 command: () => {
-                    console.log('Action');
-                } 
-            },
-            {
-                label: 'Pendientes',
-                icon: 'pi pi-times',
-                command: () => {
-                    console.log('Action');
-                } 
-            },
-            {
-                label: 'Completados',
-                icon: 'pi pi-check',
-                command: () => {
-                    console.log('Action');
+                    // setViewTodo(todos);
+                  } 
+                },
+                {
+                  label: 'Pendientes',
+                  icon: 'pi pi-times',
+                  command: () => {
+                    // setViewTodo(todos.filter( todo => todo.done === false ));
+                  } 
+                },
+                {
+                  label: 'Completados',
+                  icon: 'pi pi-check',
+                  command: () => {
+                    // setViewTodo(todos.filter( todo => todo.done === true ));
                 } 
             },
           ]
@@ -71,7 +72,7 @@ export const NavBar = ({ newTodo, deleteTodos }) => {
       ];
 
   
-    const end = <AddButton onNewTodo = { newTodo } />
+    const end = <AddButton  />
 
   return (
     <div className="px-3 py-2">
